@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  courses   Course[]
+  progressLogs ProgressLog[]
+  
+  @@map("users")
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  startDate   DateTime
+  endDate     DateTime
+  color       String   @default("#3B82F6")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  goals       Goal[]
+  
+  @@map("courses")
+}
+
+model Goal {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  deadline    DateTime
+  priority    Priority @default(MEDIUM)
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  tasks       Task[]
+  
+  @@map("goals")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  dueDate     DateTime?
+  completed   Boolean  @default(false)
+  estimatedHours Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  goalId      String
+  goal        Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  
+  progressLogs ProgressLog[]
+  
+  @@map("tasks")
+}
+
+model ProgressLog {
+  id          String   @id @default(cuid())
+  date        DateTime @default(now())
+  timeSpent   Int
+  notes       String?
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  taskId      String?
+  task        Task?    @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  @@map("progress_logs")
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
