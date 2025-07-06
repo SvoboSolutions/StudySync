@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     })
 
     // Passwort aus Response entfernen
-    const { password: _, ...userWithoutPassword } = user
+    const { password: _password, ...userWithoutPassword } = user
 
     return NextResponse.json(
       { message: 'Account erfolgreich erstellt', user: userWithoutPassword },
