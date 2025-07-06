@@ -65,7 +65,7 @@ export function GoalDetailView({ goal, onToggleGoal, onToggleTask, onCreateTask 
               <hr className="my-1" />
               <button
                 onClick={() => {
-                  if (window.confirm(`Möchtest du das Ziel "${goal.title}" wirklich löschen?`)) {
+                  if (window.confirm(`Möchtest du das Ziel &quot;${goal.title}&quot; wirklich löschen?`)) {
                     // TODO: Implement goal deletion
                     console.log('Delete goal:', goal.id)
                   }

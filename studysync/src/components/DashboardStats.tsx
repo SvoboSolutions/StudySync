@@ -23,7 +23,7 @@ interface DashboardStatsProps {
 
 export function DashboardStats({ courses }: DashboardStatsProps) {
   const getOverallStats = () => {
-    let totalCourses = courses.length
+    const totalCourses = courses.length
     let completedCourses = 0
     let totalGoals = 0
     let completedGoals = 0

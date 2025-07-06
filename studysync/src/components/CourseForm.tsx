@@ -12,7 +12,7 @@ interface Course {
 }
 
 interface CourseFormProps {
-  onSubmit: (formData: any) => void
+  onSubmit: (formData: unknown) => void
   onCancel: () => void
   editCourse?: Course | null
 }
