@@ -5,7 +5,7 @@ A modern study management application built with Next.js that helps students org
 ## ✨ Features
 
 - 🎯 **Course Management**: Create and organize study courses with custom colors and deadlines
-- 📋 **Goal Setting**: Set specific learning goals for each course with priority levels
+- 📋 **Goal Setting**: Set specific learning goals for each course with priority levels  
 - ✅ **Task Tracking**: Break down goals into manageable tasks with due dates and time estimates
 - 📊 **Progress Analytics**: Track time spent studying and monitor completion rates
 - 🔐 **User Authentication**: Secure login and registration system with NextAuth.js
@@ -45,7 +45,7 @@ A modern study management application built with Next.js that helps students org
 3. **Set up environment variables**
    
    Create a `.env` file in the root directory:
-   ```bash
+   ```env
    # Database
    DATABASE_URL="postgresql://username:password@host:port/database"
    
