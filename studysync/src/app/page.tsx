@@ -5,6 +5,7 @@ import { AuthGuard } from '@/components/AuthGuard'
 import { Header } from '@/components/Header'
 import { CourseForm } from '@/components/CourseForm'
 import { CourseCard } from '@/components/CourseCard'
+import { DashboardStats } from '@/components/DashboardStats'
 
 interface Course {
   id: string
@@ -13,10 +14,24 @@ interface Course {
   startDate: string
   endDate: string
   color: string
+  completed?: boolean
+  completedAt?: string | null
+  goals?: Goal[]
+}
+
+interface Goal {
+  id: string
+  completed: boolean
+  tasks: Task[]
+}
+
+interface Task {
+  id: string
+  completed: boolean
 }
 
 export default function Home() {
-  const [courses, setCourses] = useState<Course[]>([]) // Sicherstellen dass es ein Array ist
+  const [courses, setCourses] = useState<Course[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editCourse, setEditCourse] = useState<Course | null>(null)
@@ -31,12 +46,10 @@ export default function Home() {
       const response = await fetch('/api/courses')
       const data = await response.json()
       
-      // Bessere Fehlerbehandlung
       if (!response.ok) {
         throw new Error(data.error || 'Fehler beim Laden der Kurse')
       }
       
-      // Sicherstellen dass data ein Array ist
       if (Array.isArray(data)) {
         setCourses(data)
         setError(null)
@@ -47,7 +60,7 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Error fetching courses:', error)
-      setCourses([]) // Fallback zu leerem Array
+      setCourses([])
       setError(error instanceof Error ? error.message : 'Unbekannter Fehler')
     } finally {
       setIsLoading(false)
@@ -121,6 +134,37 @@ export default function Home() {
     }
   }
 
+  // ✅ NEU: Complete Course Function
+  const handleCompleteCourse = async (courseId: string, completed: boolean) => {
+    try {
+      console.log('Completing course:', courseId, 'completed:', completed) // Debug
+      
+      const response = await fetch(`/api/courses/${courseId}/complete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ completed })
+      })
+
+      const data = await response.json()
+      console.log('Complete response:', data) // Debug
+
+      if (response.ok) {
+        fetchCourses() // Kurse neu laden
+        setError(null)
+        
+        // Success message
+        const action = completed ? 'abgeschlossen' : 'wieder geöffnet'
+        alert(`Kurs erfolgreich ${action}!`)
+      } else {
+        console.error('Complete course error:', data)
+        setError(data.error || 'Fehler beim Abschließen des Kurses')
+      }
+    } catch (error) {
+      console.error('Error completing course:', error)
+      setError('Fehler beim Abschließen des Kurses')
+    }
+  }
+
   const handleEditCourse = (course: Course) => {
     setEditCourse(course)
     setShowForm(true)
@@ -138,6 +182,10 @@ export default function Home() {
       handleCreateCourse(formData)
     }
   }
+
+  // Separate active and completed courses
+  const activeCourses = courses.filter(course => !course.completed)
+  const completedCourses = courses.filter(course => course.completed)
 
   if (isLoading) {
     return (
@@ -167,6 +215,9 @@ export default function Home() {
               </button>
             </div>
           )}
+
+          {/* Dashboard Stats */}
+          <DashboardStats courses={courses} />
 
           <div className="flex justify-between items-center mb-8">
             <div>
@@ -205,7 +256,8 @@ export default function Home() {
             />
           )}
 
-          {courses.length === 0 ? (
+          {/* Active Courses */}
+          {activeCourses.length === 0 && completedCourses.length === 0 ? (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">📚</div>
               <h3 className="text-xl font-semibold text-gray-700 mb-2">
@@ -223,16 +275,47 @@ export default function Home() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {courses.map((course) => (
-                <CourseCard 
-                  key={course.id} 
-                  course={course}
-                  onEdit={handleEditCourse}
-                  onDelete={handleDeleteCourse}
-                />
-              ))}
-            </div>
+            <>
+              {/* Active Courses Section */}
+              {activeCourses.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                    📚 Aktive Kurse ({activeCourses.length})
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {activeCourses.map((course) => (
+                      <CourseCard 
+                        key={course.id} 
+                        course={course}
+                        onEdit={handleEditCourse}
+                        onDelete={handleDeleteCourse}
+                        onComplete={handleCompleteCourse} // ✅ Function weitergeben
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Completed Courses Section - wird als nächstes expandierbar gemacht */}
+              {completedCourses.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                    ✅ Abgeschlossene Kurse ({completedCourses.length})
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {completedCourses.map((course) => (
+                      <CourseCard 
+                        key={course.id} 
+                        course={course}
+                        onEdit={handleEditCourse}
+                        onDelete={handleDeleteCourse}
+                        onComplete={handleCompleteCourse} // ✅ Function weitergeben
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </main>
       </div>

@@ -28,6 +28,8 @@ model Course {
   startDate   DateTime
   endDate     DateTime
   color       String   @default("#3B82F6")
+  completed   Boolean  @default(false)     
+  completedAt DateTime?                    
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   
