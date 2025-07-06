@@ -1,175 +1,156 @@
 # 📚 StudySync
 
-A modern study management application built with Next.js that helps students organize their courses, set learning goals, track tasks, and monitor progress efficiently.
+Meine moderne Lernmanagement-App, die ich mit Next.js entwickelt habe. Sie hilft mir dabei, meine Kurse zu organisieren, Lernziele zu setzen, Aufgaben zu verfolgen und meinen Fortschritt effizient zu überwachen.
 
-## ✨ Features
+## ✨ Was die App kann
 
-- 🎯 **Course Management**: Create and organize study courses with custom colors and deadlines
-- 📋 **Goal Setting**: Set specific learning goals for each course with priority levels  
-- ✅ **Task Tracking**: Break down goals into manageable tasks with due dates and time estimates
-- 📊 **Progress Analytics**: Track time spent studying and monitor completion rates
-- 🔐 **User Authentication**: Secure login and registration system with NextAuth.js
-- 📱 **Responsive Design**: Beautiful, mobile-friendly interface built with Tailwind CSS
-- 🎨 **Interactive Dashboard**: Visual progress charts and statistics
+- 🎯 **Kursverwaltung**: Studienkurse erstellen und organisieren mit eigenen Farben und Deadlines
+- 📋 **Ziele setzen**: Spezifische Lernziele für jeden Kurs mit Prioritätsstufen definieren
+- ✅ **Aufgaben verfolgen**: Ziele in machbare Aufgaben mit Fälligkeitsdaten und Zeitschätzungen aufteilen
+- 📊 **Fortschrittsanalyse**: Lernzeit tracken und Abschlussraten überwachen
+- 🔐 **Benutzeranmeldung**: Sichere Anmeldung und Registrierung mit NextAuth.js
+- 📱 **Responsive Design**: Schöne, handyfreundliche Oberfläche mit Tailwind CSS
+- 🎨 **Interaktives Dashboard**: Visuelle Fortschrittsdiagramme und Statistiken
 
-## 🛠️ Tech Stack
+## 🛠️ Technologien
 
 - **Frontend**: Next.js 15, React 19, TypeScript
-- **Styling**: Tailwind CSS 4, Radix UI Components
+- **Styling**: Tailwind CSS 4, Radix UI Komponenten
 - **Backend**: Next.js API Routes
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: NextAuth.js
-- **Forms**: React Hook Form with Zod validation
-- **Charts**: Recharts for progress visualization
+- **Datenbank**: PostgreSQL mit Prisma ORM
+- **Authentifizierung**: NextAuth.js
+- **Formulare**: React Hook Form mit Zod Validierung
+- **Charts**: Recharts für Fortschrittsvisualisierung
 
-## 🚀 Getting Started
+## 🚀 So startest du die App
 
-### Prerequisites
+### Was du brauchst
 
-- Node.js 18+ and npm
-- PostgreSQL database (or Supabase account)
+- Node.js 18+ und npm
+- PostgreSQL Datenbank (oder einen Supabase Account)
 
 ### Installation
 
-1. **Clone the repository**
+1. **Repository klonen**
    ```bash
-   git clone <your-repo-url>
+   git clone <deine-repo-url>
    cd studysync
    ```
 
-2. **Install dependencies**
+2. **Dependencies installieren**
    ```bash
    npm install
    ```
 
-3. **Set up environment variables**
+3. **Umgebungsvariablen einrichten**
    
-   Create a `.env` file in the root directory:
+   Erstelle eine `.env` Datei im Hauptverzeichnis:
    ```env
-   # Database
+   # Datenbank
    DATABASE_URL="postgresql://username:password@host:port/database"
    
    # NextAuth.js
    NEXTAUTH_URL=http://localhost:3000
-   NEXTAUTH_SECRET=your-secret-key
+   NEXTAUTH_SECRET=dein-geheimer-schlüssel
    ```
 
-4. **Set up the database**
+4. **Datenbank einrichten**
    ```bash
-   # Generate Prisma client
+   # Prisma Client generieren
    npx prisma generate
    
-   # Run database migrations
+   # Datenbank-Migrationen ausführen
    npx prisma migrate dev --name init
    ```
 
-5. **Start the development server**
+5. **Development Server starten**
    ```bash
    npm run dev
    ```
 
-6. **Open the application**
+6. **App öffnen**
    
-   Navigate to [http://localhost:3000](http://localhost:3000) in your browser.
+   Gehe zu [http://localhost:3000](http://localhost:3000) in deinem Browser.
 
-## 📖 Usage
+## 📖 So benutzt du die App
 
-### Getting Started
-1. **Register** a new account or **sign in** to an existing one
-2. **Create your first course** by clicking "Add New Course"
-3. **Set goals** for your course to define what you want to achieve
-4. **Add tasks** to break down your goals into actionable steps
-5. **Track progress** by logging time spent and marking tasks as complete
+### Erste Schritte
+1. **Registriere** dich oder **melde dich** mit einem bestehenden Account an
+2. **Erstelle deinen ersten Kurs** mit einem Klick auf "Neuen Kurs hinzufügen"
+3. **Setze Ziele** für deinen Kurs, um zu definieren, was du erreichen willst
+4. **Füge Aufgaben hinzu**, um deine Ziele in umsetzbare Schritte zu unterteilen
+5. **Verfolge deinen Fortschritt**, indem du Zeit loggst und Aufgaben als erledigt markierst
 
-### Course Management
-- Create courses with custom titles, descriptions, and color themes
-- Set start and end dates to stay on track
-- View all courses in an organized dashboard layout
+### Kursverwaltung
+- Erstelle Kurse mit eigenen Titeln, Beschreibungen und Farbthemen
+- Setze Start- und Enddaten, um auf Kurs zu bleiben
+- Betrachte alle Kurse in einem übersichtlichen Dashboard-Layout
 
-### Goal Setting
-- Define specific learning objectives for each course
-- Set priority levels (Low, Medium, High, Urgent)
-- Track completion status and deadlines
+### Ziele setzen
+- Definiere spezifische Lernziele für jeden Kurs
+- Setze Prioritätsstufen (Niedrig, Mittel, Hoch, Dringend)
+- Verfolge Abschlussstatus und Deadlines
 
-### Task Tracking
-- Break down goals into smaller, manageable tasks
-- Set due dates and estimated time requirements
-- Log progress and add notes about your study sessions
+### Aufgaben verfolgen
+- Teile Ziele in kleinere, machbare Aufgaben auf
+- Setze Fälligkeitsdaten und geschätzte Zeitanforderungen
+- Logge Fortschritt und füge Notizen zu deinen Lernsessions hinzu
 
-## 🏗️ Project Structure
+## 🏗️ Projektstruktur
 
 ```
 src/
-├── app/                    # Next.js app router
-│   ├── api/               # API routes
-│   │   ├── auth/          # Authentication endpoints
-│   │   ├── courses/       # Course management
-│   │   ├── goals/         # Goal management
-│   │   └── tasks/         # Task management
-│   ├── courses/           # Course pages
-│   └── layout.tsx         # Root layout
-├── components/            # Reusable UI components
-│   ├── AuthGuard.tsx      # Authentication wrapper
-│   ├── CourseCard.tsx     # Course display component
-│   ├── DashboardStats.tsx # Statistics dashboard
+├── app/                    # Next.js App Router
+│   ├── api/               # API Routes
+│   │   ├── auth/          # Authentifizierungs-Endpunkte
+│   │   ├── courses/       # Kursverwaltung
+│   │   ├── goals/         # Zielverwaltung
+│   │   └── tasks/         # Aufgabenverwaltung
+│   ├── courses/           # Kurs-Seiten
+│   └── layout.tsx         # Root Layout
+├── components/            # Wiederverwendbare UI-Komponenten
+│   ├── AuthGuard.tsx      # Authentifizierungs-Wrapper
+│   ├── CourseCard.tsx     # Kurs-Anzeige-Komponente
+│   ├── DashboardStats.tsx # Statistik-Dashboard
 │   └── ...
-├── lib/                   # Utility libraries
-└── types/                 # TypeScript type definitions
+├── lib/                   # Utility-Bibliotheken
+└── types/                 # TypeScript-Typdefinitionen
 
 prisma/
-├── schema.prisma          # Database schema
-└── migrations/            # Database migrations
+├── schema.prisma          # Datenbankschema
+└── migrations/            # Datenbankmigrationen
 ```
 
-## 📊 Database Schema
+## 📊 Datenbankschema
 
-The application uses a PostgreSQL database with the following main entities:
+Die App nutzt eine PostgreSQL-Datenbank mit folgenden Hauptentitäten:
 
-- **Users**: User accounts and authentication
-- **Courses**: Study courses with metadata
-- **Goals**: Learning objectives linked to courses
-- **Tasks**: Actionable items linked to goals
-- **ProgressLogs**: Time tracking and progress notes
+- **Users**: Benutzerkonten und Authentifizierung
+- **Courses**: Studienkurse mit Metadaten
+- **Goals**: Lernziele verknüpft mit Kursen
+- **Tasks**: Umsetzbare Aufgaben verknüpft mit Zielen
+- **ProgressLogs**: Zeitverfolgung und Fortschrittsnotizen
 
-## 🔧 Available Scripts
+## 🔧 Verfügbare Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npx prisma studio` - Open Prisma database browser
-- `npx prisma migrate dev` - Create and apply new migration
+- `npm run dev` - Development Server starten
+- `npm run build` - Für Produktion bauen
+- `npm run start` - Produktions-Server starten
+- `npm run lint` - ESLint ausführen
+- `npx prisma studio` - Prisma Datenbank-Browser öffnen
+- `npx prisma migrate dev` - Neue Migration erstellen und anwenden
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Add your environment variables in Vercel dashboard
-4. Deploy automatically on every push
+### Vercel (Empfohlen)
+1. Code zu GitHub pushen
+2. Repository mit [Vercel](https://vercel.com) verbinden
+3. Umgebungsvariablen im Vercel Dashboard hinzufügen
+4. Automatisches Deployment bei jedem Push
 
-### Other Platforms
-The app can be deployed on any platform that supports Node.js applications (Railway, Render, Heroku, etc.).
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [Next.js](https://nextjs.org/) - The React Framework
-- UI Components by [Radix UI](https://www.radix-ui.com/)
-- Charts powered by [Recharts](https://recharts.org/)
-- Database ORM by [Prisma](https://www.prisma.io/)
+### Andere Plattformen
+Die App kann auf jeder Plattform deployed werden, die Node.js-Anwendungen unterstützt (Railway, Render, Heroku, etc.).
 
 ---
 
-**Happy Studying! 📚✨**
+**Viel Spaß beim Lernen! 📚✨**
