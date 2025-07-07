@@ -3,6 +3,7 @@
 interface Course {
   id: string
   title: string
+  completed?: boolean
   goals?: Goal[]
 }
 
@@ -32,9 +33,26 @@ export function DashboardStats({ courses }: DashboardStatsProps) {
     let totalProgress = 0
 
     courses.forEach(course => {
+      // Wenn Kurs direkt als abgeschlossen markiert ist
+      if (course.completed) {
+        completedCourses++
+        totalProgress += 100
+        
+        // Zähle trotzdem Goals und Tasks für die Statistik
+        if (course.goals) {
+          totalGoals += course.goals.length
+          completedGoals += course.goals.filter(g => g.completed).length
+          course.goals.forEach(goal => {
+            totalTasks += goal.tasks.length
+            completedTasks += goal.tasks.filter(task => task.completed).length
+          })
+        }
+        return
+      }
+
+      // Kurs ohne Goals oder Tasks
       if (!course.goals || course.goals.length === 0) {
-        // Kurs ohne Goals/Tasks = 0% Fortschritt
-        totalProgress += 0
+        totalProgress += 0 // 0% Fortschritt für leere Kurse
         return
       }
 
@@ -50,13 +68,19 @@ export function DashboardStats({ courses }: DashboardStatsProps) {
       totalTasks += courseTasks
       completedTasks += courseCompletedTasks
 
-      // Kurs-Fortschritt: 50% Goals + 50% Tasks
+      // Berechne Kurs-Fortschritt basierend auf verfügbaren Elementen
       let courseProgress = 0
-      if (courseGoals > 0) {
-        courseProgress += (courseCompletedGoals / courseGoals) * 50
-      }
-      if (courseTasks > 0) {
-        courseProgress += (courseCompletedTasks / courseTasks) * 50
+      
+      if (courseGoals > 0 && courseTasks > 0) {
+        // Beide vorhanden: 50% Goals + 50% Tasks
+        courseProgress = ((courseCompletedGoals / courseGoals) * 50) + 
+                        ((courseCompletedTasks / courseTasks) * 50)
+      } else if (courseGoals > 0) {
+        // Nur Goals vorhanden: 100% Goals
+        courseProgress = (courseCompletedGoals / courseGoals) * 100
+      } else if (courseTasks > 0) {
+        // Nur Tasks vorhanden: 100% Tasks
+        courseProgress = (courseCompletedTasks / courseTasks) * 100
       }
 
       totalProgress += courseProgress
@@ -92,8 +116,8 @@ export function DashboardStats({ courses }: DashboardStatsProps) {
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 text-center shadow-sm">
-          <div className="text-2xl font-bold text-blue-600">{stats.totalCourses}</div>
-          <div className="text-sm text-gray-600">Kurse</div>
+          <div className="text-2xl font-bold text-blue-600">{stats.completedCourses}/{stats.totalCourses}</div>
+          <div className="text-sm text-gray-600">Kurse abgeschlossen</div>
         </div>
         
         <div className="bg-white rounded-lg p-4 text-center shadow-sm">
