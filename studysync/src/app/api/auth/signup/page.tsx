@@ -53,49 +53,49 @@ export default function SignUp() {
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Name:</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700">Name:</label>
             <input
               type="text"
               required
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 md:bg-white focus:bg-white focus:border-green-500 focus:outline-none transition-colors"
               placeholder="Dein Name"
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Email:</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700">Email:</label>
             <input
               type="email"
               required
               value={formData.email}
               onChange={(e) => setFormData({...formData, email: e.target.value})}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 md:bg-white focus:bg-white focus:border-green-500 focus:outline-none transition-colors"
               placeholder="deine@email.com"
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Passwort:</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700">Passwort:</label>
             <input
               type="password"
               required
               value={formData.password}
               onChange={(e) => setFormData({...formData, password: e.target.value})}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 md:bg-white focus:bg-white focus:border-green-500 focus:outline-none transition-colors"
               placeholder="Mindestens 6 Zeichen"
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Passwort bestätigen:</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700">Passwort bestätigen:</label>
             <input
               type="password"
               required
               value={formData.confirmPassword}
               onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 md:bg-white focus:bg-white focus:border-green-500 focus:outline-none transition-colors"
               placeholder="Passwort wiederholen"
             />
           </div>
