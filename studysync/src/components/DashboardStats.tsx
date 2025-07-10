@@ -88,7 +88,7 @@ export function DashboardStats({ courses }: DashboardStatsProps) {
 
   return (
     <div className="mb-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100">
-      <h2 className="text-xl font-bold text-gray-900 mb-4">📊 Dein Lernfortschritt</h2>
+      <h2 className="text-xl font-bold text-gray-900 mb-4">Dein Lernfortschritt</h2>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 text-center shadow-sm">
