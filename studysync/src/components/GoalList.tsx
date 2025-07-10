@@ -37,7 +37,7 @@ export function GoalsList({ goals, onNewGoal, onToggleGoal, onToggleTask, onCrea
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">🎯 Lernziele</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Lernziele</h2>
           <p className="text-gray-600 mt-1">
             {goals.length > 0 && (
               <>

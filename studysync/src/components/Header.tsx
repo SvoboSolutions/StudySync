@@ -1,6 +1,7 @@
 'use client'
 
 import { useSession, signOut } from 'next-auth/react'
+import Image from 'next/image'
 
 export function Header() {
   const { data: session } = useSession()
@@ -10,9 +11,18 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-gray-900">
-              📚 StudySync
-            </h1>
+            <div className="flex items-center space-x-2">
+              <Image
+                src="/public/StudySync.svg"
+                alt="StudySync Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8"
+              />
+              <h1 className="text-2xl font-bold text-gray-900">
+                StudySync
+              </h1>
+            </div>
             <span className="ml-3 text-sm text-gray-500">
               Lernplan Manager
             </span>

@@ -178,13 +178,6 @@ export function GoalCard({ goal, onToggleGoal, onToggleTask, onCreateTask }: Goa
                     {totalTasks > 0 && ` (${goal.tasks.filter(t => !t.completed).length} offen)`}
                   </button>
                 </div>
-                
-                <button
-                  onClick={() => setShowTaskForm(true)}
-                  className="px-3 py-1 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  + Aufgabe
-                </button>
               </div>
             </div>
           </div>

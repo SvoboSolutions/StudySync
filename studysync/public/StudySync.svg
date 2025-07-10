@@ -1,0 +1,18 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund (abgerundet) -->
+  <rect x="32" y="32" width="448" height="448" rx="96" fill="#4CAF50"></rect>
+  
+  <!-- Buchseiten -->
+  <path d="M128 128c0-8 8-16 16-16h224c8 0 16 8 16 16v256c0 8-8 16-16 16H144c-8 0-16-8-16-16V128z" fill="#ffffff" stroke="#2E7D32" stroke-width="16"></path>
+  
+  <!-- Mittelfalz-Linie -->
+  <line x1="256" y1="128" x2="256" y2="384" stroke="#81C784" stroke-width="8" stroke-dasharray="12 12"></line>
+  
+  <!-- Checkliste-Linien -->
+  <line x1="160" y1="176" x2="240" y2="176" stroke="#4CAF50" stroke-width="12" stroke-linecap="round"></line>
+  <line x1="160" y1="224" x2="240" y2="224" stroke="#4CAF50" stroke-width="12" stroke-linecap="round"></line>
+  <line x1="160" y1="272" x2="240" y2="272" stroke="#4CAF50" stroke-width="12" stroke-linecap="round"></line>
+  
+  <!-- Häkchen -->
+  <path d="M280 256l32 32 56-56" fill="none" stroke="#4CAF50" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
