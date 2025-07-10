@@ -13,7 +13,7 @@ export function Header() {
           <div className="flex items-center">
             <div className="flex items-center space-x-2">
               <Image
-                src="/public/StudySync.svg"
+                src="../public/StudySync.svg"
                 alt="StudySync Logo"
                 width={32}
                 height={32}
