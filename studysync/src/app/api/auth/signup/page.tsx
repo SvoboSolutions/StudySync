@@ -47,8 +47,8 @@ export default function SignUp() {
   }
 
   return (
-    <div className="min-h-screen bg-green-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+    <div className="min-h-screen bg-gray-100 md:bg-green-50 flex items-center justify-center">
+      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full mx-4">
         <h1 className="text-2xl font-bold mb-6 text-center">StudySync Registrierung</h1>
         
         <form onSubmit={handleSubmit} className="space-y-4">
