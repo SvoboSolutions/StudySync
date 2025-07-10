@@ -122,16 +122,18 @@ export function GoalCard({ goal, onToggleGoal, onToggleTask, onCreateTask }: Goa
                   
                   <div className="text-right text-sm">
                     <div className="text-gray-500">📅 {formatGoalDate(goal.deadline)}</div>
-                    <div className={`font-medium ${
-                      daysRemaining < 0 ? 'text-red-600' :
-                      daysRemaining === 0 ? 'text-orange-600' :
-                      daysRemaining <= 7 ? 'text-yellow-600' :
-                      'text-green-600'
-                    }`}>
-                      {daysRemaining < 0 ? `${Math.abs(daysRemaining)} Tage überfällig` :
-                       daysRemaining === 0 ? 'Heute fällig' :
-                       `${daysRemaining} Tage verbleibend`}
-                    </div>
+                    {!goal.completed && (
+                      <div className={`font-medium ${
+                        daysRemaining < 0 ? 'text-red-600' :
+                        daysRemaining === 0 ? 'text-orange-600' :
+                        daysRemaining <= 7 ? 'text-yellow-600' :
+                        'text-green-600'
+                      }`}>
+                        {daysRemaining < 0 ? `${Math.abs(daysRemaining)} Tage überfällig` :
+                         daysRemaining === 0 ? 'Heute fällig' :
+                         `${daysRemaining} Tage verbleibend`}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -314,7 +316,7 @@ export function GoalCard({ goal, onToggleGoal, onToggleTask, onCreateTask }: Goa
                             <p className="text-sm text-gray-600 mt-1">{task.description}</p>
                           )}
                           
-                          {task.dueDate && taskDate && (
+                          {task.dueDate && taskDate && !task.completed && (
                             <div className="flex items-center mt-2">
                               <span className={`text-xs font-medium ${taskDate.style}`}>
                                 {taskDate.text}
